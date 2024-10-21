@@ -8,9 +8,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.example.appinmobiliaria.R;
 import com.example.appinmobiliaria.databinding.ActivityMenuBinding;
+import com.example.appinmobiliaria.models.Propietario;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import androidx.navigation.NavController;
@@ -19,6 +21,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Objects;
 
 
 public class MenuActivity extends AppCompatActivity {
@@ -43,7 +47,9 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
         DrawerLayout drawer = binding.drawerLayout;
+
         NavigationView navigationView = binding.navView;
+        iniciarHeader(navigationView);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -68,6 +74,20 @@ public class MenuActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+    private void iniciarHeader(NavigationView navigationView){
+        View header = navigationView.getHeaderView(0);
+
+        TextView nombre = header.findViewById(R.id.tvNombreHeader);
+        TextView mail = header.findViewById(R.id.tvMailHeader);
+
+        Propietario p = this.getIntent().getBundleExtra("propietario").getSerializable("propietario", Propietario.class);
+        /*.with(header.getContext())
+                .load("http://192.168.0.114:45455"+p.getAvatar())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(foto);*/
+        nombre.setText(p.getNombre()+ " " + p.getApellido());
+        mail.setText(p.getEmail()+"");
     }
     public void solicitarPermisos(){
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M

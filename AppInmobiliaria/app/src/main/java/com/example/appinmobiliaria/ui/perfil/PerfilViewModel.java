@@ -1,4 +1,4 @@
-package com.example.appinmobiliaria.ui.gallery;
+package com.example.appinmobiliaria.ui.perfil;
 
 import android.app.Application;
 import android.content.Context;
@@ -7,13 +7,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.appinmobiliaria.models.Propietario;
 import com.example.appinmobiliaria.request.ApiClient;
-import com.google.android.gms.common.api.Api;
 
 import retrofit2.Call;
 import retrofit2.Callback;

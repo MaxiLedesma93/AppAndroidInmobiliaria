@@ -4,12 +4,14 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
+import com.example.appinmobiliaria.models.Propietario;
 import com.example.appinmobiliaria.ui.MenuActivity;
 import com.example.appinmobiliaria.request.ApiClient;
 
@@ -26,19 +28,33 @@ public class LoginActivityViewModel extends AndroidViewModel{
     }
     public void Logueo(String email, String password){
         ApiClient.MisEndPoints api = ApiClient.getEndPoints();
+        Bundle bundle = new Bundle();
         Call<String> call = api.login(email, password);
         call.enqueue(new Callback<String>() {
             //en response.body() viene el token en un String.
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
-                    Log.d("salida", response.body());
                     SharedPreferences sp = ApiClient.conectar(context);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("token", "Bearer "+ response.body());
                     editor.apply();
-                    Log.d("salida 2", sp.getString("token","nada"));
-                    iniciarMenu();
+                    Call<Propietario> callPropietario = api.get("Bearer "+response.body());
+                    callPropietario.enqueue(new Callback<Propietario>() {
+                        @Override
+                        public void onResponse(Call<Propietario> call, Response<Propietario> response) {
+                            bundle.putSerializable("propietario", response.body());
+                            iniciarMenu(bundle);
+                        }
+
+                        @Override
+                        public void onFailure(Call<Propietario> call, Throwable throwable) {
+                            Toast.makeText(getApplication(), "Error obteniendo el usuario para" +
+                                    " header", Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+
                 }else {
                     Toast.makeText(getApplication(), "Usuario y/o Contraseña Incorrectos",
                             Toast.LENGTH_LONG).show();
@@ -53,9 +69,12 @@ public class LoginActivityViewModel extends AndroidViewModel{
         });
     }
 
-    public void iniciarMenu(){
+    public void iniciarMenu(Bundle p){
+
+
         Intent intent = new Intent(getApplication(), MenuActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("propietario", p);
         getApplication().startActivity(intent);
     }
 }
