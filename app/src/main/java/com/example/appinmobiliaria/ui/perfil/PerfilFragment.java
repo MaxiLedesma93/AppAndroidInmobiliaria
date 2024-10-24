@@ -46,20 +46,8 @@ public class PerfilFragment extends Fragment {
                         .placeholder(R.drawable.ic_perfilvacio)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(binding.ivProp);
-
-                //etPass.setText(propietario.getContraseña());
-
             }
         });
- /*       pvm.getmVisibilidad().observe(getViewLifecycleOwner(), new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                binding.etContraseA.setVisibility(integer);
-                binding.etRepetirContraseA.setVisibility(integer);
-                binding.etClaveActual.setVisibility(integer);
-                binding.btnCClave.setVisibility(integer);
-            }
-        }); */
         binding.btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,12 +57,8 @@ public class PerfilFragment extends Fragment {
                 p.setNombre(binding.etNombre.getText().toString());
                 p.setApellido(binding.etApellido.getText().toString());
                 p.setEmail(binding.etMail.getText().toString());
-                // p.setContraseña(etPass.getText().toString());
                 p.setTelefono(binding.etTel.getText().toString());
-                String pass = binding.etClaveActual.getText().toString();
                 pvm.guardarPropietario(p);
-
-
             }
         });
         binding.btnCClave.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +71,6 @@ public class PerfilFragment extends Fragment {
                 binding.textView5.setVisibility(View.VISIBLE);
                 binding.btnCClave.setVisibility(View.GONE);
                 binding.btnGuardar.setVisibility(View.GONE);
-
-
             }
         });
         binding.btnGuardarClave.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +88,6 @@ public class PerfilFragment extends Fragment {
                 binding.textView5.setVisibility(View.GONE);
                 binding.btnCClave.setVisibility(View.VISIBLE);
                 binding.btnGuardar.setVisibility(View.VISIBLE);
-
             }
         });
         pvm.obtenerPropietarioActual();

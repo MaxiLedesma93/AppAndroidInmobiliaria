@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="433dp"
         android:layout_height="match_parent"
-        android:background="#1A2827">
+        android:background="#D3EFEE">
 
         <ImageView
             android:id="@+id/ivProp"
@@ -218,8 +218,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="76dp"
-            android:visibility="gone"
             android:text="Clave actual:"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPerfil6"
             tools:visibility="gone" />
