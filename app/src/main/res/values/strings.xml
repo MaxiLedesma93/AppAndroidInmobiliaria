@@ -19,4 +19,5 @@
     <string name="apellido">Apellido</string>
     <string name="email">Mail</string>
     <string name="tel">Telefono</string>
+    <string name="cbEstado">Disponible</string>
 </resources>

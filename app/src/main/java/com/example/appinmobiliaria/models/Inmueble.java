@@ -6,16 +6,18 @@ public class Inmueble implements Serializable {
     private int id;
     private String direccion;
     private int ambientes;
-    private Uso uso;
+    private String uso;
     private Propietario duenio;
     private Tipo tipo;
     private int importe;
+    private String imgUrl;
     private boolean disponible;
 
+    public Inmueble() {
+    }
 
-
-    public Inmueble(int id, String direccion, int ambientes, Uso uso, Propietario duenio, Tipo tipo,
-                    int importe, boolean disponible) {
+    public Inmueble(int id, String direccion, int ambientes, Propietario duenio,
+                    Tipo tipo, String uso, int importe, String imgUrl, boolean disponible) {
         this.id = id;
         this.direccion = direccion;
         this.ambientes = ambientes;
@@ -23,7 +25,20 @@ public class Inmueble implements Serializable {
         this.duenio = duenio;
         this.tipo = tipo;
         this.importe = importe;
+        this.imgUrl = imgUrl;
         this.disponible = disponible;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getUso() {
+        return uso;
+    }
+
+    public void setUso(String uso) {
+        this.uso = uso;
     }
 
     public int getId() {
@@ -50,13 +65,11 @@ public class Inmueble implements Serializable {
         this.ambientes = ambientes;
     }
 
-    public Uso getUso() {
-        return uso;
+
+    public Tipo getTipo() {
+        return tipo;
     }
 
-    public void setUso(Uso uso) {
-        this.uso = uso;
-    }
 
     public Propietario getDuenio() {
         return duenio;
@@ -64,14 +77,6 @@ public class Inmueble implements Serializable {
 
     public void setDuenio(Propietario duenio) {
         this.duenio = duenio;
-    }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
     }
 
     public int getImporte() {
@@ -82,6 +87,14 @@ public class Inmueble implements Serializable {
         this.importe = importe;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
     public boolean isDisponible() {
         return disponible;
     }
@@ -89,6 +102,4 @@ public class Inmueble implements Serializable {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
-
-
 }

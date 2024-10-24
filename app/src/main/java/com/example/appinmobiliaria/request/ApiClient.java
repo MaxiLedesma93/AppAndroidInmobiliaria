@@ -4,10 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.session.MediaSession;
 
+import com.example.appinmobiliaria.models.Inmueble;
 import com.example.appinmobiliaria.models.Propietario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -21,6 +26,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public class ApiClient {
     private static final String URL = "http://192.168.0.9:5000/";
@@ -36,8 +42,16 @@ public class ApiClient {
 
     public static MisEndPoints getEndPoints() {
         Gson gson = new GsonBuilder().setLenient().create();
+        // Construimos un cliente HTTP utilizando OkHttpClient para manejar las solicitudes
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        // Crear un interceptor para el logging
+        // agregar a gradle: implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.14'
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpClient.addInterceptor(loggingInterceptor);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(URL)
+                .client(httpClient.build())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
@@ -49,7 +63,7 @@ public class ApiClient {
 
         //Realiza el login
         @FormUrlEncoded
-        @POST("Propietarios/login")
+        @POST("propietarios/login")
         Call<String> login(@Field("Email")String e, @Field("Clave")String c);
 
 
@@ -57,8 +71,22 @@ public class ApiClient {
         @GET("propietarios")
         Call<Propietario> get(@Header("Authorization") String authorization);
 
-        @PATCH("Propietarios/editar")
+        @PATCH("propietarios/editar")
         Call<Propietario> editarPerfil(@Header("Authorization") String token, @Body Propietario p);
+
+        @FormUrlEncoded
+        @PATCH("propietarios/cambiarpass")
+        Call<Propietario> cambiarpass(@Header("Authorization") String token,
+                                      @Field("clVieja")String v,
+                                      @Field("clNueva")String n);
+
+        //Inmuebles
+
+        @GET("inmuebles/listainmuebles")
+        Call<List<Inmueble>> listaInmuebles(@Header("Authorization") String token);
+
+        @PATCH("inmuebles/disponible{id}")
+        Call<Inmueble> editarDisponible(@Header("Authorization") String token, @Path("id") int id);
 
     }
 

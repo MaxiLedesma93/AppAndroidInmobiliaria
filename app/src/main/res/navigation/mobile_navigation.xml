@@ -19,7 +19,21 @@
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.appinmobiliaria.ui.slideshow.SlideshowFragment"
+        android:name="com.example.appinmobiliaria.ui.inmueble.InmuebleFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_inmueble">
+        <action
+            android:id="@+id/action_nav_slideshow_to_inmuebleDetalleFragment"
+            app:destination="@id/inmuebleDetalleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inmuebleDetalleFragment"
+        android:name="com.example.appinmobiliaria.ui.inmueble.InmuebleDetalleFragment"
+        android:label="Detalle de Inmueble"
+        tools:layout="@layout/fragment_inmueble_detalle" >
+        <action
+            android:id="@+id/action_inmuebleDetalleFragment_to_nav_slideshow"
+            app:destination="@id/nav_slideshow" />
+    </fragment>
+
 </navigation>
