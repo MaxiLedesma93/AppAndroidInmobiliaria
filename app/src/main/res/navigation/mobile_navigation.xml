@@ -25,7 +25,14 @@
         <action
             android:id="@+id/action_nav_slideshow_to_inmuebleDetalleFragment"
             app:destination="@id/inmuebleDetalleFragment" />
+        <action
+            android:id="@+id/action_nav_slideshow_to_fragment_crear_Inmueble"
+            app:destination="@id/fragment_crear_Inmueble" />
     </fragment>
+    <fragment
+        android:id="@+id/fragment_crear_Inmueble"
+        android:name="com.example.appinmobiliaria.ui.inmueble.CrearInmuebleFragment"
+        tools:layout="@layout/fragment_crear_inmueble"/>
     <fragment
         android:id="@+id/inmuebleDetalleFragment"
         android:name="com.example.appinmobiliaria.ui.inmueble.InmuebleDetalleFragment"

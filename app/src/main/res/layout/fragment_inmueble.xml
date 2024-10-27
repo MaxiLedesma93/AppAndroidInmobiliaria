@@ -17,9 +17,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:background="#0437EF"
-        android:clickable="true"
-        android:layout_marginRight="25dp"
         android:layout_marginBottom="25dp"
-        android:src="@android:drawable/ic_input_add"/>
+        android:layout_marginRight="25dp"
+        android:background="#631BE4"
+        android:clickable="true"
+        android:contentDescription="TODO"
+        android:src="@android:drawable/ic_menu_add" />
 </FrameLayout>

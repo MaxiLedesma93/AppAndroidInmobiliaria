@@ -20,4 +20,11 @@
     <string name="email">Mail</string>
     <string name="tel">Telefono</string>
     <string name="cbEstado">Disponible</string>
+    <string-array name="tipos">
+        <item value="1">Local</item>
+        <item value="2">Deposito</item>
+        <item value="3">Casa</item>
+        <item value="4">Departamento</item>
+        <item value="5">Residencial</item>
+    </string-array>
 </resources>

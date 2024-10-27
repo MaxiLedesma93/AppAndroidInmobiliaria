@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -23,9 +24,11 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public class ApiClient {
@@ -87,6 +90,13 @@ public class ApiClient {
 
         @PATCH("inmuebles/disponible{id}")
         Call<Inmueble> editarDisponible(@Header("Authorization") String token, @Path("id") int id);
+
+        @Multipart
+        @POST("inmuebles/")
+        Call<Inmueble> crearInmueble(@Part("imagen")String url, @Field("direccion")String direccion,
+                                     @Field("ambientes")int ambientes, @Field("importe")int importe,
+                                     @Field("uso")String uso, @Field("tipoId")int tipoId,
+                                     @Field("disponible")boolean disponible);
 
     }
 
