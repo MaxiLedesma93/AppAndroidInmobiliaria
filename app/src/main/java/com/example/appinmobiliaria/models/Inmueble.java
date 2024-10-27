@@ -11,13 +11,14 @@ public class Inmueble implements Serializable {
     private Tipo tipo;
     private int importe;
     private String imgUrl;
+    private byte[] imagen;
     private boolean disponible;
 
     public Inmueble() {
     }
 
-    public Inmueble(int id, String direccion, int ambientes, Propietario duenio,
-                    Tipo tipo, String uso, int importe, String imgUrl, boolean disponible) {
+    public Inmueble(int id, String direccion, int ambientes, String uso, Propietario duenio,
+                    Tipo tipo, int importe, String imgUrl, byte[] imagen, boolean disponible) {
         this.id = id;
         this.direccion = direccion;
         this.ambientes = ambientes;
@@ -26,7 +27,16 @@ public class Inmueble implements Serializable {
         this.tipo = tipo;
         this.importe = importe;
         this.imgUrl = imgUrl;
+        this.imagen = imagen;
         this.disponible = disponible;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
 
     public void setTipo(Tipo tipo) {

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.BadParcelableException;
 import android.os.Bundle;
@@ -31,6 +32,10 @@ import android.widget.Toast;
 
 import com.example.appinmobiliaria.R;
 import com.example.appinmobiliaria.databinding.FragmentCrearInmuebleBinding;
+import com.example.appinmobiliaria.models.Tipo;
+
+import java.util.List;
+import java.util.Map;
 
 public class CrearInmuebleFragment extends Fragment {
 
@@ -52,25 +57,30 @@ public class CrearInmuebleFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(CrearInmuebleViewModel.class);
         abrirGaleria();
         spinner = binding.getRoot().findViewById(R.id.spTipo);
-        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(getContext(), R.array.tipos, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        spinner.setAdapter(adapter);
-        adapter.getItem(spinner.getSelectedItemPosition());
-        spinner.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    public void onItemSelected(AdapterView<?> spn,
-                                               android.view.View v,
-                                               int posicion,
-                                               long id) {
-                        Toast.makeText(spn.getContext(), "Has seleccionado " +
-                                        spn.getItemAtPosition(posicion).toString(),
-                                Toast.LENGTH_LONG).show();
 
+        mViewModel.getMSpinner().observe(getViewLifecycleOwner(), new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                        android.R.layout.simple_spinner_dropdown_item, strings);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                spinner.setAdapter(adapter);
+            }
+        });
+        mViewModel.getMTipos().observe(getViewLifecycleOwner(), new Observer<List<Tipo>>() {
+            @Override
+            public void onChanged(List<Tipo> tipos) {
+                mViewModel.cargarSpinner(tipos);
+            }
+        });
 
-                    }
-                    public void onNothingSelected(AdapterView<?> spn) {
-                    }
-                });
+     //   adapter.getItem(spinner.getSelectedItemPosition());
+        mViewModel.getMUri().observe(getViewLifecycleOwner(), new Observer<Uri>() {
+            @Override
+            public void onChanged(Uri uri) {
+                binding.ivFotoDetInmu.setImageURI(uri);
+            }
+        });
 
 
         binding.btnImagen.setOnClickListener(new View.OnClickListener() {
@@ -84,12 +94,18 @@ public class CrearInmuebleFragment extends Fragment {
             public void onClick(View view) {
                 String direccion = binding.tvDetDir.getText().toString();
                 int ambientes = Integer.parseInt(binding.tvDetAmb.getText().toString());
-                String uso = binding.tvDetUso.toString();
+                String uso = binding.tvDetUso.getText().toString();
+                int importe = Integer.parseInt(binding.tvDetPrecio.getText().toString());
                 BitmapDrawable drawable = (BitmapDrawable) binding.ivFotoDetInmu.getDrawable();
                 Bitmap foto = drawable.getBitmap();
+                String tipoDesc = spinner.getSelectedItem().toString();
+                mViewModel.guardarInmueble(direccion, ambientes, uso, importe, tipoDesc,foto);
+
 
             }
         });
+
+        mViewModel.cargarDatosTipo();
         return binding.getRoot();
     }
 
@@ -106,6 +122,8 @@ public class CrearInmuebleFragment extends Fragment {
 
             }
         });
+
+
 
 
 

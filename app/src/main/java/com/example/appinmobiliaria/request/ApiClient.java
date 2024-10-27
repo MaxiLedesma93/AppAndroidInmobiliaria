@@ -2,10 +2,12 @@ package com.example.appinmobiliaria.request;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.media.session.MediaSession;
 
 import com.example.appinmobiliaria.models.Inmueble;
 import com.example.appinmobiliaria.models.Propietario;
+import com.example.appinmobiliaria.models.Tipo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -93,10 +95,17 @@ public class ApiClient {
 
         @Multipart
         @POST("inmuebles/")
-        Call<Inmueble> crearInmueble(@Part("imagen")String url, @Field("direccion")String direccion,
-                                     @Field("ambientes")int ambientes, @Field("importe")int importe,
-                                     @Field("uso")String uso, @Field("tipoId")int tipoId,
-                                     @Field("disponible")boolean disponible);
+        Call<Inmueble> crearInmueble(@Header("Authorization")String token,
+                                     @Part("imagen") byte[] url, @Part("direccion")String direccion,
+                                     @Part("ambientes")int ambientes, @Part("importe")int importe,
+                                     @Part("uso")String uso, @Part("tipoId")int tipoId,
+                                     @Part("disponible")boolean disponible);
+
+        //Tipos
+
+        @GET("tipos/listatipos")
+        Call<List<Tipo>> listaTipos(@Header("Authorization")String token);
+
 
     }
 
