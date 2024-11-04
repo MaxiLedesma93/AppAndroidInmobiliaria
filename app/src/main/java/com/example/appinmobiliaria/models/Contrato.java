@@ -1,8 +1,9 @@
 package com.example.appinmobiliaria.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Contrato {
+public class Contrato implements Serializable {
     private int id;
     private LocalDate fecInicio;
     private LocalDate fecFin;

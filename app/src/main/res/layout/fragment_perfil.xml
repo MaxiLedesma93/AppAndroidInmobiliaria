@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="433dp"
         android:layout_height="match_parent"
-        android:background="#D3EFEE">
+        android:background="#D3EFEE"
+        android:backgroundTint="#FFD740">
 
         <ImageView
             android:id="@+id/ivProp"
@@ -33,6 +34,7 @@
             android:enabled="true"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:textColor="@color/black"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.81"
@@ -48,6 +50,7 @@
             android:enabled="true"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:textColor="@color/black"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.796"
@@ -63,6 +66,7 @@
             android:enabled="true"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:textColor="@color/black"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.796"
@@ -78,6 +82,7 @@
             android:enabled="false"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:textColor="@color/black"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.805"
@@ -93,6 +98,7 @@
             android:enabled="true"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:textColor="@color/black"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.796"
@@ -106,6 +112,7 @@
             android:layout_marginStart="36dp"
             android:layout_marginTop="160dp"
             android:text="@string/dni"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -116,6 +123,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="52dp"
             android:text="@string/nombre"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPerfil1" />
 
@@ -126,6 +134,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="72dp"
             android:text="@string/apellido"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPerfil2" />
 
@@ -136,6 +145,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="44dp"
             android:text="@string/email"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPerfil3" />
 
@@ -146,6 +156,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="44dp"
             android:text="@string/tel"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPerfil4" />
 
@@ -154,6 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
+            android:backgroundTint="#FF6E40"
             android:text="Guardar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.155"
@@ -165,6 +177,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
+            android:backgroundTint="#FF6E40"
             android:text="Cambiar Clave"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.764"

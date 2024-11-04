@@ -7,8 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -19,16 +21,21 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.appinmobiliaria.models.Inmueble;
+import com.example.appinmobiliaria.models.RealPathUtil;
 import com.example.appinmobiliaria.models.Tipo;
 import com.example.appinmobiliaria.request.ApiClient;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.*;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,22 +85,35 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
 
 
 
-    public void guardarInmueble(String direccion, int ambientes, String uso,int importe, String descTipo, Bitmap foto ){
+    public void guardarInmueble(String direccionIn, int ambientesIn, String usoIn,int importeIn,
+                                String descTipoIn, Uri uriImagen){
         SharedPreferences sp = ApiClient.conectar(context);
         String token = sp.getString("token", "no token");
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        foto.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        int tipoId=0;
+        int tipoIdEncontrado=0;
+        String rutaArchivo = RealPathUtil.getRealPath(context, uriImagen);
+        File archivo = new File(rutaArchivo);
+
+        //Buscamos el id del tipo seleccionado en el Map tipos.
         Iterator<String> it = tipos.keySet().iterator();
         while(it.hasNext()){
             String key = it.next();
-           if(key.equals(descTipo)){
-               tipoId = tipos.get(key);
-           }
+            if(key.equals(descTipoIn)){
+                tipoIdEncontrado = tipos.get(key);
+            }
         }
-        Call<Inmueble> inmuebleCall = ApiClient.getEndPoints().crearInmueble(token,byteArray,
-                direccion, ambientes, importe,uso, tipoId, false);
+        RequestBody direccion = RequestBody.create(MediaType.parse("application/json"),direccionIn);
+        RequestBody ambientes = RequestBody.create(MediaType.parse("application/json"),String.valueOf(ambientesIn));
+        RequestBody uso = RequestBody.create(MediaType.parse("application/json"), usoIn);
+        RequestBody importe = RequestBody.create(MediaType.parse("application/json"), String.valueOf(importeIn));
+        RequestBody tipoId = RequestBody.create(MediaType.parse("application/json"), String.valueOf(tipoIdEncontrado));
+        RequestBody disponible = RequestBody.create(MediaType.parse("application/json"), String.valueOf(false) );
+        RequestBody imagenBody = RequestBody.create(MediaType.parse("multipart/form-data"), archivo);
+        MultipartBody.Part imagenFile = MultipartBody.Part.createFormData("imagen", archivo.getName(), imagenBody);
+
+
+
+        Call<Inmueble> inmuebleCall = ApiClient.getEndPoints().crearInmueble(token,  imagenFile,
+                direccion, ambientes, importe,uso, tipoId, disponible);
         inmuebleCall.enqueue(new Callback<Inmueble>() {
             @Override
             public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
@@ -102,8 +122,8 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(Call<Inmueble> call, Throwable throwable) {
-                Toast.makeText(context, "Error al guardar inmueble", Toast.LENGTH_LONG).show();
-
+                Toast.makeText(context, "Error al guardar inmueble"+ throwable.getMessage(), Toast.LENGTH_LONG).show();
+                Log.d("salida",throwable.getMessage());
             }
         });
 

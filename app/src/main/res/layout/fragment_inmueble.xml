@@ -5,20 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAFAFA"
+    android:backgroundTint="#FFD740"
     tools:context=".ui.inmueble.InmuebleFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInmuebles"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:backgroundTint="#FFD740" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAgregarInmueble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="25dp"
         android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp"
         android:background="#631BE4"
         android:clickable="true"
         android:contentDescription="TODO"

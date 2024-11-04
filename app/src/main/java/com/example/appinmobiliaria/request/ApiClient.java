@@ -2,9 +2,12 @@ package com.example.appinmobiliaria.request;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.media.session.MediaSession;
+import android.net.Uri;
 
+import com.example.appinmobiliaria.models.Contrato;
 import com.example.appinmobiliaria.models.Inmueble;
 import com.example.appinmobiliaria.models.Propietario;
 import com.example.appinmobiliaria.models.Tipo;
@@ -13,6 +16,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -32,6 +36,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 public class ApiClient {
     private static final String URL = "http://192.168.0.9:5000/";
@@ -90,21 +95,31 @@ public class ApiClient {
         @GET("inmuebles/listainmuebles")
         Call<List<Inmueble>> listaInmuebles(@Header("Authorization") String token);
 
+
         @PATCH("inmuebles/disponible{id}")
         Call<Inmueble> editarDisponible(@Header("Authorization") String token, @Path("id") int id);
 
         @Multipart
         @POST("inmuebles/")
         Call<Inmueble> crearInmueble(@Header("Authorization")String token,
-                                     @Part("imagen") byte[] url, @Part("direccion")String direccion,
-                                     @Part("ambientes")int ambientes, @Part("importe")int importe,
-                                     @Part("uso")String uso, @Part("tipoId")int tipoId,
-                                     @Part("disponible")boolean disponible);
+                                     @Part MultipartBody.Part imagen,
+                                     @Part("direccion")RequestBody direccion,
+                                     @Part("ambientes")RequestBody ambientes,
+                                     @Part("importe")RequestBody importe,
+                                     @Part("uso")RequestBody uso, @Part("tipoId")RequestBody tipoId,
+                                     @Part("disponible")RequestBody disponible);
+
 
         //Tipos
 
         @GET("tipos/listatipos")
         Call<List<Tipo>> listaTipos(@Header("Authorization")String token);
+
+
+        //Contratos
+
+        @GET("Contratos")
+        Call<List<Contrato>> obtenerInmueblesAlquilados(@Header("Authorization") String token);
 
 
     }
