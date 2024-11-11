@@ -181,12 +181,12 @@
             android:backgroundTint="#FF6E40"
             android:text="Guardar"
             android:textColor="#FFFFFF"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.155"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etRepetirContraseña"
-            tools:visibility="invisible" />
+            tools:visibility="gone" />
 
         <Button
             android:id="@+id/btnCClave"

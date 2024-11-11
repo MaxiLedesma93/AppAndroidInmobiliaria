@@ -13,11 +13,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
 
-
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.appinmobiliaria.R;
 import com.example.appinmobiliaria.databinding.ActivityMenuBinding;
 import com.example.appinmobiliaria.models.Propietario;
@@ -89,12 +91,13 @@ public class MenuActivity extends AppCompatActivity {
 
         TextView nombre = header.findViewById(R.id.tvNombreHeader);
         TextView mail = header.findViewById(R.id.tvMailHeader);
+        ImageView imageView = header.findViewById(R.id.imageView);
 
         Propietario p = this.getIntent().getBundleExtra("propietario").getSerializable("propietario", Propietario.class);
-        /*.with(header.getContext())
-                .load("http://192.168.0.114:45455"+p.getAvatar())
+        Glide.with(header.getContext())
+                .load("http://192.168.0.3:5000/"+p.getAvatarUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(foto);*/
+                .into(imageView);
         nombre.setText(p.getNombre()+ " " + p.getApellido());
         mail.setText(p.getEmail()+"");
     }

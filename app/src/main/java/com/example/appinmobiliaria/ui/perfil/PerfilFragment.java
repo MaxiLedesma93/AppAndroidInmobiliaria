@@ -89,6 +89,7 @@ public class PerfilFragment extends Fragment {
                 binding.btnGuardarClave.setVisibility(View.VISIBLE);
                 binding.btnCClave.setVisibility(View.GONE);
                 binding.btnGuardar.setVisibility(View.GONE);
+                binding.btnEditar.setVisibility(View.GONE);
             }
         });
         binding.btnGuardarClave.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +105,8 @@ public class PerfilFragment extends Fragment {
                 binding.etRepetirContraseA.setVisibility(View.GONE);
                 binding.btnGuardarClave.setVisibility(View.GONE);
                 binding.btnCClave.setVisibility(View.VISIBLE);
-                binding.btnGuardar.setVisibility(View.VISIBLE);
+                binding.btnGuardar.setVisibility(View.GONE);
+                binding.btnEditar.setVisibility(View.VISIBLE);
             }
         });
         pvm.obtenerPropietarioActual();
