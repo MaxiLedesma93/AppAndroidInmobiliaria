@@ -43,7 +43,7 @@ public class InmuebleDetalleViewModel extends AndroidViewModel {
         inmueble.setValue(i);
     }
 
-    public void guardarEstado(int id){
+    public void guardarEstado(int id, boolean b){
         SharedPreferences sp = ApiClient.conectar(context);
         String token = sp.getString("token", "no token");
         Call<Inmueble> inmuebleCall = ApiClient.getEndPoints().editarDisponible(token, id);
@@ -51,15 +51,20 @@ public class InmuebleDetalleViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
                 if (response.isSuccessful()){
+
                     Toast.makeText(context, "El estado se guardó con éxito", Toast.LENGTH_LONG).show();
                 }
-            }
+                else{
+                    Toast.makeText(context, "error"+response.message(), Toast.LENGTH_LONG).show();
 
+                }
+            }
             @Override
             public void onFailure(Call<Inmueble> call, Throwable t) {
                 Toast.makeText(context, "Falla en guardar estado(On failure)", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 
 }

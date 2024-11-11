@@ -5,8 +5,8 @@ import java.time.LocalDate;
 
 public class Contrato implements Serializable {
     private int id;
-    private LocalDate fecInicio;
-    private LocalDate fecFin;
+    private String fecInicio;
+    private String fecFin;
     private double monto;
     private boolean estado;
     private Inquilino inquilino;
@@ -14,7 +14,7 @@ public class Contrato implements Serializable {
 
 
 
-    public Contrato(int id, LocalDate fecInicio, LocalDate fecFin,
+    public Contrato(int id, String fecInicio, String fecFin,
                     double monto, boolean estado, Inquilino inquilino, Inmueble inmueble) {
         this.id = id;
         this.fecInicio = fecInicio;
@@ -49,19 +49,19 @@ public class Contrato implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getFecInicio() {
+    public String getFecInicio() {
         return fecInicio;
     }
 
-    public void setFecInicio(LocalDate fecInicio) {
+    public void setFecInicio(String fecInicio) {
         this.fecInicio = fecInicio;
     }
 
-    public LocalDate getFecFin() {
+    public String getFecFin() {
         return fecFin;
     }
 
-    public void setFecFin(LocalDate fecFin) {
+    public void setFecFin(String fecFin) {
         this.fecFin = fecFin;
     }
 

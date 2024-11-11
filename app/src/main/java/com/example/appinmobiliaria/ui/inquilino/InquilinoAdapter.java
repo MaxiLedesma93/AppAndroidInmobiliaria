@@ -49,7 +49,7 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.View
         Inquilino inq = c.getInquilino();
         holder.tvDirec.setText(inmu.getDireccion());
         Glide.with(context)
-                .load("http://192.168.0.104:5001/"+inmu.getImgUrl())
+                .load("http://192.168.0.3:5000/"+inmu.getImgUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.ivfotoInq);
 
@@ -58,7 +58,7 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.View
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("inquilino", inq);
-                Navigation.findNavController(view).navigate(R.id.inmuebleDetalleFragment, bundle);
+                Navigation.findNavController(view).navigate(R.id.inquilinoDetalleFragment, bundle);
             }
         });
     }

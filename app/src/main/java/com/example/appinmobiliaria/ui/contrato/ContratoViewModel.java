@@ -1,9 +1,8 @@
-package com.example.appinmobiliaria.ui.inquilino;
+package com.example.appinmobiliaria.ui.contrato;
 
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,48 +19,38 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InquilinoViewModel extends AndroidViewModel {
-    private Context context;
-    private MutableLiveData<List<Contrato>> listMutableLiveData;
+public class ContratoViewModel extends AndroidViewModel {
 
-    public InquilinoViewModel(@NonNull Application application) {
+    private Context context;
+    private MutableLiveData<List<Contrato>> mListaContratos;
+
+
+    public ContratoViewModel(@NonNull Application application) {
         super(application);
         context = getApplication().getApplicationContext();
     }
-    public MutableLiveData<List<Contrato>> getContrato() {
-        if(listMutableLiveData == null){
-            listMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<List<Contrato>> getmListaContratos(){
+        if(mListaContratos == null){
+            mListaContratos = new MutableLiveData<>();
         }
-        return listMutableLiveData;
+        return mListaContratos;
     }
-
-    /*public LiveData<List<Inmueble>> getInmueble(){
-        if(inmueble == null){
-            inmueble = new MutableLiveData<>();
-        }
-        return inmueble;
-    }*/
-
-    public void mostrarInmuebles() {
+    public void inmueblesAlquilados(){
         SharedPreferences sp = ApiClient.conectar(context);
-        String t = sp.getString("token", "vacio");
-
-        Call<List<Contrato>> con = ApiClient.getEndPoints().obtenerInmueblesAlquilados(t);
+        String token = sp.getString("token", "-1");
+        Call<List<Contrato>> con = ApiClient.getEndPoints().obtenerInmueblesAlquilados(token);
         con.enqueue(new Callback<List<Contrato>>() {
             @Override
             public void onResponse(Call<List<Contrato>> call, Response<List<Contrato>> response) {
                 if(response.isSuccessful()){
-                    listMutableLiveData.postValue(response.body());
+                    mListaContratos.postValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<List<Contrato>> call, Throwable t) {
-                Log.d("salida", t.getMessage());
-                Toast.makeText(context, "Ocurrio un error "+t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Failure en obtener inmuebles Alquilados ", Toast.LENGTH_LONG).show();
             }
         });
     }
-
-
 }

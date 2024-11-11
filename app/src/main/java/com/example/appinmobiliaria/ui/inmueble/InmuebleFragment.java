@@ -41,7 +41,8 @@ public class InmuebleFragment extends Fragment {
         inmuebleViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
             @Override
             public void onChanged(List<Inmueble> inmuebles) {
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+                GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),
+                        2, GridLayoutManager.VERTICAL, false);
                 rvInmuebles.setLayoutManager(gridLayoutManager);
                 adapter = new InmuebleAdapter(inmuebles, binding.getRoot(), getLayoutInflater());
                 rvInmuebles.setAdapter(adapter);

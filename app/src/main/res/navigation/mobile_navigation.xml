@@ -63,6 +63,42 @@
             android:id="@+id/action_inquilinoDetalleFragment_to_nav_inquilino"
             app:destination="@id/nav_inquilino" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.example.appinmobiliaria.ui.logout.LogoutFragment"
+        tools:layout="@layout/fragment_logout"
+        android:label="Logout"/>
+    <fragment
+        android:id="@+id/pagoFragment"
+        android:name="com.example.appinmobiliaria.ui.contrato.PagoFragment"
+        tools:layout="@layout/fragment_pago"
+        android:label="Pagos">
+
+        <action
+            android:id="@+id/action_pagoFragment_to_detalleContratoFragment"
+            app:destination="@id/detalleContratoFragment" />
+    </fragment>
+    <fragment android:id="@+id/nav_contrato"
+        android:name="com.example.appinmobiliaria.ui.contrato.ContratoFragment"
+        tools:layout="@layout/fragment_contrato"
+        android:label="Contratos">
+        <action
+            android:id="@+id/action_nav_contrato_to_detalleContratoFragment"
+            app:destination="@id/detalleContratoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalleContratoFragment"
+        android:name="com.example.appinmobiliaria.ui.contrato.ContratoDetalleFragment"
+        tools:layout="@layout/fragment_contrato_detalle"
+        android:label="Detalle Contrato">
+
+        <action
+            android:id="@+id/action_detalleContratoFragment_to_pagoFragment"
+            app:destination="@id/pagoFragment" />
+        <action
+            android:id="@+id/action_detalleContratoFragment_to_nav_contrato"
+            app:destination="@id/nav_contrato" />
+    </fragment>
 
 
 </navigation>

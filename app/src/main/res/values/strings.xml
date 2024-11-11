@@ -20,5 +20,8 @@
     <string name="email">Mail</string>
     <string name="tel">Telefono</string>
     <string name="cbEstado">Disponible</string>
+    <string name="link" >
+        <a href="">Olvidaste tu contraseña? haz click aqui</a>
+    </string>
 
 </resources>

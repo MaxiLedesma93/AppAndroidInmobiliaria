@@ -69,6 +69,24 @@ public class LoginActivityViewModel extends AndroidViewModel{
         });
     }
 
+    public void RecuperarPass(String email){
+        Call<String> call = ApiClient.getEndPoints().resetearpass(email);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Toast.makeText(context, "Email enviado con exito revise su correo.",
+                        Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable throwable) {
+                Toast.makeText(context, "Error al enviar el Email.",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
     public void iniciarMenu(Bundle p){
 
 

@@ -1,5 +1,6 @@
-package com.example.appinmobiliaria.ui.inquilino;
+package com.example.appinmobiliaria.ui.contrato;
 
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,44 +17,50 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.appinmobiliaria.R;
-import com.example.appinmobiliaria.databinding.FragmentInquilinoBinding;
+import com.example.appinmobiliaria.databinding.FragmentContratoBinding;
 import com.example.appinmobiliaria.models.Contrato;
 
 import java.util.List;
 
-public class InquilinoFragment extends Fragment {
+public class ContratoFragment extends Fragment {
 
-    private InquilinoViewModel mViewModel;
-    private FragmentInquilinoBinding binding;
-    private RecyclerView rvInquilinos;
-    private InquilinoAdapter adapter;
+    private ContratoViewModel mViewModel;
+    private FragmentContratoBinding binding;
+    private ContratoAdapter adapter;
+    private RecyclerView rvContratos;
 
-    public static InquilinoFragment newInstance() {
-        return new InquilinoFragment();
+    public static ContratoFragment newInstance() {
+        return new ContratoFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentInquilinoBinding.inflate(getLayoutInflater());
-        mViewModel = new ViewModelProvider(this).get(InquilinoViewModel.class);
-        rvInquilinos = binding.rvInquilinos;
-        mViewModel.getContrato().observe(getViewLifecycleOwner(), new Observer<List<Contrato>>() {
+        binding = FragmentContratoBinding.inflate(getLayoutInflater());
+        mViewModel = new ViewModelProvider(this).get(ContratoViewModel.class);
+
+        rvContratos = binding.rvContratos;
+        mViewModel.getmListaContratos().observe(getViewLifecycleOwner(), new Observer<List<Contrato>>() {
             @Override
             public void onChanged(List<Contrato> contratos) {
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),
                         2, GridLayoutManager.VERTICAL, false);
-                rvInquilinos.setLayoutManager(gridLayoutManager);
-                adapter = new InquilinoAdapter(contratos, binding.getRoot(), getLayoutInflater());
-                rvInquilinos.setAdapter(adapter);
+                rvContratos.setLayoutManager(gridLayoutManager);
+                adapter = new ContratoAdapter(contratos, binding.getRoot(), getLayoutInflater());
+                rvContratos.setAdapter(adapter);
+
             }
         });
-        mViewModel.mostrarInmuebles();
 
 
 
+
+
+
+        mViewModel.inmueblesAlquilados();
         return binding.getRoot();
     }
+
 
 
 }

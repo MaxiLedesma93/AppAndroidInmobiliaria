@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.appinmobiliaria.R;
 import com.example.appinmobiliaria.databinding.FragmentPerfilBinding;
 import com.example.appinmobiliaria.models.Propietario;
+import com.example.appinmobiliaria.ui.contrato.PagoAdapter;
 
 public class PerfilFragment extends Fragment {
     private PerfilViewModel pvm;
@@ -42,12 +43,24 @@ public class PerfilFragment extends Fragment {
                 binding.etMail.setText(propietario.getEmail());
                 binding.etTel.setText(propietario.getTelefono());
                 Glide.with(getContext())
-                        .load("http://192.168.0.9:5000/"+propietario.getAvatarUrl())
+                        .load("http://192.168.0.3:5000/"+propietario.getAvatarUrl())
                         .placeholder(R.drawable.ic_perfilvacio)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(binding.ivProp);
             }
         });
+        binding.btnEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.etNombre.setEnabled(true);
+                binding.etApellido.setEnabled(true);
+                binding.etDni.setEnabled(true);
+                binding.etTel.setEnabled(true);
+                binding.btnEditar.setVisibility(View.GONE);
+                binding.btnGuardar.setVisibility(View.VISIBLE);
+            }
+        });
+
         binding.btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +71,12 @@ public class PerfilFragment extends Fragment {
                 p.setApellido(binding.etApellido.getText().toString());
                 p.setEmail(binding.etMail.getText().toString());
                 p.setTelefono(binding.etTel.getText().toString());
+                binding.etNombre.setEnabled(false);
+                binding.etApellido.setEnabled(false);
+                binding.etDni.setEnabled(false);
+                binding.etTel.setEnabled(false);
+                binding.btnEditar.setVisibility(View.VISIBLE);
+                binding.btnGuardar.setVisibility(View.GONE);
                 pvm.guardarPropietario(p);
             }
         });
@@ -68,7 +87,6 @@ public class PerfilFragment extends Fragment {
                 binding.etContraseA.setVisibility(View.VISIBLE);
                 binding.etRepetirContraseA.setVisibility(View.VISIBLE);
                 binding.btnGuardarClave.setVisibility(View.VISIBLE);
-                binding.textView5.setVisibility(View.VISIBLE);
                 binding.btnCClave.setVisibility(View.GONE);
                 binding.btnGuardar.setVisibility(View.GONE);
             }
@@ -85,7 +103,6 @@ public class PerfilFragment extends Fragment {
                 binding.etContraseA.setVisibility(View.GONE);
                 binding.etRepetirContraseA.setVisibility(View.GONE);
                 binding.btnGuardarClave.setVisibility(View.GONE);
-                binding.textView5.setVisibility(View.GONE);
                 binding.btnCClave.setVisibility(View.VISIBLE);
                 binding.btnGuardar.setVisibility(View.VISIBLE);
             }

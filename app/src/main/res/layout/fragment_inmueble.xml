@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
-    android:backgroundTint="#FFD740"
+    android:background="#DFDFDF"
+    android:backgroundTint="#DFDFDF"
     tools:context=".ui.inmueble.InmuebleFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInmuebles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="#FFD740" />
+        android:backgroundTint="#DFDFDF" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAgregarInmueble"

@@ -5,8 +5,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
-    android:backgroundTint="#FFAB40"
-    app:cardBackgroundColor="#FAFAFA"
+    android:backgroundTint="#DFDFDF"
+    app:cardBackgroundColor="#DFDFDF"
     app:cardCornerRadius="20dp"
     app:cardElevation="10dp"
     app:contentPadding="20dp">
@@ -15,7 +15,7 @@
         android:layout_width="114dp"
         android:layout_height="229dp"
         android:background="#FAFAFA"
-        android:backgroundTint="#FFAB40">
+        android:backgroundTint="#DFDFDF">
 
         <TextView
             android:id="@+id/textView"
@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Inmueble"
+            android:textColor="@color/black"
             android:textSize="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

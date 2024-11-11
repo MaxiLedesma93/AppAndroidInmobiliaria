@@ -42,7 +42,7 @@ public class InmuebleDetalleFragment extends Fragment {
             @Override
             public void onChanged(Inmueble inmueble) {
                 Glide.with(root.getContext())
-                        .load("http://192.168.0.9:5000/"+inmueble.getImgUrl())
+                        .load("http://192.168.0.3:5000/"+inmueble.getImgUrl())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(binding.ivFotoDetInmu);
                 //tvDetId.setText(inmueble.getIdInmueble()+"");
@@ -52,6 +52,12 @@ public class InmuebleDetalleFragment extends Fragment {
                 binding.tvDetTipo.setText("Tipo: "+inmueble.getTipo().getDescripcion());
                 binding.tvDetPrecio.setText(String.valueOf("Precio: $ "+inmueble.getImporte()));
                 binding.cbEstado.setChecked(inmueble.isDisponible());
+                binding.cbEstado.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mViewModel.guardarEstado(inmueble.getId(), binding.cbEstado.isChecked());
+                    }
+                });
 
             }
         });
